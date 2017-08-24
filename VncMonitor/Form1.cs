@@ -21,7 +21,7 @@ namespace VncMonitor
 
         String S, PS;
         Screen SS;
-        int PSH,PSW,WS,NS=1,SWH,SWW,NX,NY;
+        int PSH,PSW,WS,NS=12,SWH,SWW,NX,NY;
 
         Calculations Calc = new Calculations();
 
@@ -34,7 +34,7 @@ namespace VncMonitor
             SWH = Calc.SoftwindowHeight(WS);
             SWW = Calc.Softwindowwidth(WS);
             NX = Calc.WindowsX(PSH, SWH);
-            NY = Calc.WindowsX(PSW, SWW);
+            NY = Calc.WindowsY(PSW, SWW);
         }
 
         
@@ -50,17 +50,20 @@ namespace VncMonitor
         private void button1_Click(object sender, EventArgs e)
         {
 
+            ScreenWork();
+            MessageBox.Show(NX.ToString()+" "+NY.ToString());
             
+
             int x=-SWW, y=0;
 
-
+            
             for(int i=0;i<NY; i++)
             { 
                 for(int j=0; j<NX; j++ )
                 {
 
 
-                    Process P = Process.Start(S);
+                    Process P = Process.Start("notepad");
                     // Process P = Process.Start(S,"-File "+PS);
 
                     while (P.MainWindowHandle == IntPtr.Zero)

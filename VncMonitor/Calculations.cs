@@ -34,22 +34,24 @@ namespace VncMonitor
 
         public int SoftwindowHeight(int Size)
         {
-            return Size * 9 / 17;
+            return Convert.ToInt16(Math.Sqrt(Size / 1.77));
         }
 
         public int Softwindowwidth(int Size)
         {
-            return Size * 16 / 10;
+            return Convert.ToInt16(Math.Sqrt(Size*1.77));
         }
 
         public int WindowsX(int H, int SFH)
         {
-            return H / SFH;
+            if (H % SFH != 0) { return (H / SFH) + 1; }
+            return (H / SFH);
         }
 
         public int WindowsY(int W, int SFW)
         {
-            return W / SFW;
+          //  if (W % SFW != 0) { return (W / SFW) + 1; }
+            return (W / SFW);
         }
     }
 }
