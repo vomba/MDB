@@ -21,7 +21,7 @@ namespace VncMonitor
 
         String S, PS;
         Screen SS;
-        int PSH,PSW,WS,NS=12,SWH,SWW,NX,NY;
+        int PSH,PSW,WS,NS=5,SWH,SWW,NX,NY;
 
         Calculations Calc = new Calculations();
 
@@ -51,10 +51,12 @@ namespace VncMonitor
         {
 
             ScreenWork();
-            MessageBox.Show(NX.ToString()+" "+NY.ToString());
-            
+            MessageBox.Show(SWH.ToString()+" "+SWW.ToString()+"\n"+ NX.ToString() + " " + NY.ToString()+"\n"+PSH.ToString()+" "+PSW.ToString());
 
-            int x=-SWW, y=0;
+
+
+
+            int x =-SWW, y=0;
 
             
             for(int i=0;i<NY; i++)
