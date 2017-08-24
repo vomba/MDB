@@ -74,6 +74,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AzureStorageEmulatorDb51DataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Calculations.cs" />
     <Compile Include="DB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

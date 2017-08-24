@@ -19,28 +19,60 @@ namespace VncMonitor
             InitializeComponent();
         }
 
-        String S;
+        String S, PS;
+        Screen SS;
+        int PSH,PSW,WS,NS=1,SWH,SWW,NX,NY;
 
+        Calculations Calc = new Calculations();
+
+        private void ScreenWork()
+        {
+            SS = Calc.PrimaryScreen();
+            PSH = Calc.PrimaryScreenHeight(SS);
+            PSW = Calc.PrimaryScreenWidth(SS);
+            WS = Calc.WindowSize(PSH, PSW, NS);
+            SWH = Calc.SoftwindowHeight(WS);
+            SWW = Calc.Softwindowwidth(WS);
+            NX = Calc.WindowsX(PSH, SWH);
+            NY = Calc.WindowsX(PSW, SWW);
+        }
+
+        
+        
+
+       
+
+
+        
+
+       
+        
         private void button1_Click(object sender, EventArgs e)
         {
-            int x=-200, y=0;
-            for(int i=0;i<4;i++)
+
+            
+            int x=-SWW, y=0;
+
+
+            for(int i=0;i<NY; i++)
             { 
-                for(int j=0; j<5; j++ )
+                for(int j=0; j<NX; j++ )
                 {
 
-                
-            Process P = Process.Start(S);
-            while (P.MainWindowHandle == IntPtr.Zero)
-                Application.DoEvents();
 
-            MoveWindow(P.MainWindowHandle, x+200, y, 200, 200, true);
+                    Process P = Process.Start(S);
+                    // Process P = Process.Start(S,"-File "+PS);
+
+                    while (P.MainWindowHandle == IntPtr.Zero)
+                    Application.DoEvents();
+
+                    MoveWindow(P.MainWindowHandle, x+ SWW, y, SWW, SWH, true);
                     SetWindowText(P.MainWindowHandle, ""+i+" "+j);
-                x += 200;
+                    x += SWW;
                
                 }
-                x = -200;
-                y += 200;
+                x = -SWW;
+                y += SWH;
             }
             /*Process P1 = Process.Start("C:\\Program Files\\VideoLAN\\VLC\\vlc.exe");
             while (P1.MainWindowHandle == IntPtr.Zero)
@@ -68,7 +100,7 @@ namespace VncMonitor
                 db.SaveChanges();
             }
 
-            this.machineSetTableAdapter.Fill(this.azureStorageEmulatorDb51DataSet.MachineSet);
+            Form1_Load(sender, e);
 
 
         }
@@ -78,9 +110,13 @@ namespace VncMonitor
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            try { 
             // TODO: cette ligne de code charge les données dans la table 'azureStorageEmulatorDb51DataSet.MachineSet'. Vous pouvez la déplacer ou la supprimer selon les besoins.
             this.machineSetTableAdapter.Fill(this.azureStorageEmulatorDb51DataSet.MachineSet);
-            
+            }catch(Exception Ex)
+            {
+               
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -101,6 +137,13 @@ namespace VncMonitor
         {
             openFileDialog1.ShowDialog();
             S = openFileDialog1.FileName;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
+            PS = openFileDialog1.FileName;
+           // NS = openFileDialog1.FileNames.Length;
         }
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
